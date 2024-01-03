@@ -10,7 +10,7 @@ import {
   CCardTitle,
 } from "@coreui/react";
 import styled from "styled-components";
-import AddArticle from "../components/organism/add-article";
+import AddArticle from "../../views/components/organism/add-article";
 import protectedPage from "../auth/protectedPage";
 
 type ArticleType = {

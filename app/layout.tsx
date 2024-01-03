@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@coreui/coreui/dist/css/coreui.min.css";
-import Navbar from "./components/molecule/navbar";
-import { Account } from "./contexts/account";
+import Navbar from "../views/components/molecule/navbar";
+import { Account } from "../application/contexts/account";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -1,5 +1,5 @@
-import { AuthContext } from "@/app/contexts/account";
-import { useFriendStatus } from "@/app/contexts/hooks/online";
+import { AuthContext } from "@/application/contexts/account";
+import { useFriendStatus } from "@/application/contexts/hooks/online";
 import { CButton } from "@coreui/react";
 import Link from "next/link";
 import { useContext } from "react";

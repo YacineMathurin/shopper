@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { CButton, CCardLink, CForm, CFormInput } from "@coreui/react";
-import { AuthContext } from "@/app/contexts/account";
+import { AuthContext } from "@/application/contexts/account";
 import Link from "next/link";
 
 export default function Auth() {

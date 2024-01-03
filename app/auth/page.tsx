@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { CButton } from "@coreui/react";
-import { AuthContext } from "../contexts/account";
+import { AuthContext } from "../../application/contexts/account";
 import { useRouter } from "next/navigation";
 
-import Input from "../components/atoms/input";
-import Form from "../components/atoms/form";
+import Input from "../../views/components/atoms/input";
+import Form from "../../views/components/atoms/form";
 
 export default function Auth() {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -19,7 +19,7 @@ export default function Auth() {
   const password = watch("password");
 
   const onSubmit = async () => {
-    console.log("Submitted !", watch("email"), password);
+    console.log("Submitted !", email, password);
     try {
       const result = await context?.authenticate(email, password);
       console.log("Authenticate", result);

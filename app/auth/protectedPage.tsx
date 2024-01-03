@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/account";
-import { useFriendStatus } from "../contexts/hooks/online";
+import { AuthContext } from "../../application/contexts/account";
+import { useFriendStatus } from "../../application/contexts/hooks/online";
 
 export default function protectedPage() {
   const isOnline = useFriendStatus();

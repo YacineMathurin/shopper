@@ -1,4 +1,4 @@
-import { AuthContext } from "@/app/contexts/account";
+import { AuthContext } from "@/application/contexts/account";
 import {
   CButton,
   CCard,

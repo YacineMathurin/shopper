@@ -3,7 +3,7 @@
 import { CContainer, CNavbar, CNavbarBrand } from "@coreui/react";
 import { UserStatus } from "./user-status";
 import { useContext } from "react";
-import { AuthContext } from "@/app/contexts/account";
+import { AuthContext } from "@/application/contexts/account";
 
 export default function Navbar() {
   const context = useContext(AuthContext);
