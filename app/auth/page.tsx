@@ -1,11 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { CButton, CCardLink, CForm, CFormInput } from "@coreui/react";
+import { CButton } from "@coreui/react";
 import { AuthContext } from "../contexts/account";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import Input from "../components/atoms/input";
+import Form from "../components/atoms/form";
 
 export default function Auth() {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -16,7 +19,7 @@ export default function Auth() {
   const password = watch("password");
 
   const onSubmit = async () => {
-    console.log("Submitted !", email, password);
+    console.log("Submitted !", watch("email"), password);
     try {
       const result = await context?.authenticate(email, password);
       console.log("Authenticate", result);
@@ -30,11 +33,10 @@ export default function Auth() {
     <div>
       <h1>Sign in to your account</h1>
 
-      <CForm onSubmit={handleSubmit(onSubmit)}>
-        <CFormInput
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
           {...register("email")}
           type="email"
-          id="exampleFormControlInput1"
           label="Email address"
           placeholder="name@example.com"
           text="Must be 8-20 characters long."
@@ -42,10 +44,9 @@ export default function Auth() {
           defaultValue={"baby@baby.com"}
         />
         <br />
-        <CFormInput
+        <Input
           {...register("password")}
           type="password"
-          id="exampleFormControlInput1"
           label="Password"
           placeholder="my-secured-password"
           text="Must be 8-20 characters long."
@@ -56,7 +57,7 @@ export default function Auth() {
         <CButton color="secondary" type="submit" size="sm">
           Sign in
         </CButton>
-      </CForm>
+      </Form>
       <br />
       <div>
         <p>
