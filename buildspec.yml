@@ -12,3 +12,7 @@ phases:
     commands:
       - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
       - echo Build completed on `date`
+
+artifacts:
+  files:
+      - imagedefinitions.json
