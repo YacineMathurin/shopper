@@ -15,11 +15,11 @@ phases:
       - docker tag shoppers:latest $REPOSITORY_URI:latest
   post_build:
     commands:
-      - echo Build completed on `date`
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - echo Writing image definitions file...
       - printf '[{"name":"shoppers","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json
+      - echo Build completed on `date`
 artifacts:
     files: imagedefinitions.json
