@@ -13,8 +13,8 @@ phases:
 
   post_build:
     commands:
+      - cat imagedefinitions.json
       - echo Build completed on `date`
 
 artifacts:
-    files:
-      - imagedefinitions.json
+  files: imagedefinitions.json
