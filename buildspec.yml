@@ -9,6 +9,8 @@ phases:
       - echo Build started on `date`
       - echo Compiling the code as docker image
       - printf '[{"name":"shoppers","imageUri":"yacinemathurin/shoppers-docker"}]' > imagedefinitions.json
+      - cat imagedefinitions.json
+
   post_build:
     commands:
       - echo Build completed on `date`
