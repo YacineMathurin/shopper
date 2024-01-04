@@ -8,6 +8,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Compiling the code as docker image
+      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
   post_build:
     commands:
       - echo Build completed on `date`
