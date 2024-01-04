@@ -1,12 +1,12 @@
 import { AuthContext } from "@/application/contexts/account";
-import { useFriendStatus } from "@/application/contexts/hooks/online";
+import { useUserStatus } from "@/application/contexts/hooks/online";
 import { CButton } from "@coreui/react";
 import Link from "next/link";
 import { useContext } from "react";
 
 export const UserStatus = () => {
   const context = useContext(AuthContext);
-  const isOnline = useFriendStatus();
+  const isOnline = useUserStatus();
 
   return isOnline ? (
     <>

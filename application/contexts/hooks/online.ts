@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react';
 import { AuthContext } from '../account';
 
-export function useFriendStatus() {
+export function useUserStatus() {
    const context = useContext(AuthContext);
 
   useEffect(() => {

@@ -19,10 +19,8 @@ export default function Auth() {
   const password = watch("password");
 
   const onSubmit = async () => {
-    console.log("Submitted !", email, password);
     try {
-      const result = await context?.authenticate(email, password);
-      console.log("Authenticate", result);
+      await context?.authenticate(email, password);
       router.replace("/seller");
     } catch (error) {
       console.error(error);

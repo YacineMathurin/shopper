@@ -2,9 +2,11 @@
 
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { CButton, CCardLink, CForm, CFormInput } from "@coreui/react";
+import { CButton } from "@coreui/react";
 import { AuthContext } from "@/application/contexts/account";
 import Link from "next/link";
+import Input from "@/views/components/atoms/input";
+import Form from "@/views/components/atoms/form";
 
 export default function Auth() {
   const { register, handleSubmit, watch, reset } = useForm();
@@ -27,8 +29,8 @@ export default function Auth() {
     <div>
       <h1>Create your account and join us</h1>
 
-      <CForm onSubmit={handleSubmit(onSubmit)}>
-        <CFormInput
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
           {...register("email")}
           type="email"
           id="exampleFormControlInput1"
@@ -38,7 +40,7 @@ export default function Auth() {
           aria-describedby="exampleFormControlInputHelpInline"
         />
         <br />
-        <CFormInput
+        <Input
           {...register("password")}
           type="password"
           id="exampleFormControlInput1"
@@ -51,7 +53,7 @@ export default function Auth() {
         <CButton color="secondary" type="submit" size="sm">
           Register
         </CButton>
-      </CForm>
+      </Form>
       <br />
       <div>
         <p>
