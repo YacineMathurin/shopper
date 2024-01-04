@@ -1,9 +1,0 @@
-version: 0.0
-Resources:
-  - TargetService:
-      Type: AWS::ECS::Service
-      Properties:
-        TaskDefinition: "arn:aws:ecs:eu-west-3:328246126808:task-definition/shoppers-docker:latest"
-        LoadBalancerInfo:
-          ContainerName: "shoppers"
-          ContainerPort: 3000
