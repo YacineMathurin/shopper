@@ -1,20 +1,25 @@
 version: 0.2
 
 phases:
-  install: 
+  pre_build:
     commands:
-      - echo installing phase
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 328246126808.dkr.ecr.eu-west-3.amazonaws.com
+      - REPOSITORY_URI=328246126808.dkr.ecr.eu-west-3.amazonaws.com/shoppers
   build:
     commands:
       - echo Build started on `date`
-      - echo Compiling the code as docker image
-      - printf '[{"name":"shoppers","imageUri":"yacinemathurin/shoppers-docker"}]' > imagedefinitions.json
-      - cat imagedefinitions.json
-
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"hello-world","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
 artifacts:
-  files: 
-    - imagedefinitions.json
+    files: imagedefinitions.json
