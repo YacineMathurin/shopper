@@ -10,9 +10,8 @@ phases:
       - echo Compiling the code as docker image
   post_build:
     commands:
-      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
       - echo Build completed on `date`
 
 artifacts:
-  files:
+    files:
       - imagedefinitions.json
