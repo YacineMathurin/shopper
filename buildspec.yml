@@ -10,8 +10,8 @@ phases:
       - S3_BUCKET=mbay-shoppers-bucket
       - apt-get update
       - apt-get install sudo
-      - chmod +x ./scripts/install-aws
-      - ./scripts/install-aws
+      - chmod +x ./scripts/install-aws.sh
+      - ./scripts/install-aws.sh
       - npm install
   build:
     commands:
