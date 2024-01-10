@@ -1,12 +1,13 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
   pre_build:
     commands:
       - echo entring the Pre_Build phase...
       - S3_BUCKET=mbay-shoppers-bucket
-      - chmod +x ./scripts/install-node.sh
-      - ./scripts/install-node.sh
       - npm install
   build:
     commands:
