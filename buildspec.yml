@@ -5,6 +5,7 @@ phases:
     commands:
       - echo entring the Pre_Build phase...
       - S3_BUCKET=mbay-shoppers-bucket
+      - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
       - nvm install v18.12.1
       - nvm use v18.12.1
       - npm install
