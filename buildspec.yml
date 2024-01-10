@@ -5,8 +5,8 @@ phases:
     commands:
       - echo entring the Pre_Build phase...
       - S3_BUCKET=mbay-shoppers-bucket
-      - sudo chown -R 99:0 "/root/.npm"
-      - npm i node@18.12.0 -g
+      - nvm install v18.12.1
+      - nvm use v18.12.1
       - npm install
   build:
     commands:
