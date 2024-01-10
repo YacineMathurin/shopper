@@ -8,6 +8,10 @@ phases:
     commands:
       - echo entring the Pre_Build phase...
       - S3_BUCKET=mbay-shoppers-bucket
+      - apt-get update
+      - apt-get install sudo
+      - chmod +x ./scripts/install-aws
+      - ./scripts/install-aws
       - npm install
   build:
     commands:
