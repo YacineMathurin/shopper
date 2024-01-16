@@ -4,7 +4,11 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
+      - bash ./scripts/install-sudo.sh
+      - bash ./scripts/install-aws.sh
+      - bash ./scripts/install-docker.sh
       - aws --version
+      - docker -v
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 328246126808.dkr.ecr.eu-west-3.amazonaws.com
       - REPOSITORY_URI=328246126808.dkr.ecr.eu-west-3.amazonaws.com/shoppers
   build:
