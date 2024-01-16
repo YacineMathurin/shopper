@@ -66,7 +66,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Homepage displaying all of our products</h1>
+      <h1>Homepage</h1>
       <div className="flex">
         {articles?.map((article) => (
           <CCard style={{ width: "18rem" }} key={article.name}>
