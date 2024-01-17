@@ -98,11 +98,13 @@ export default function SellerDashboard() {
     </Wrapper>
   );
 }
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 5em;
 `;
+
 const EditSection = styled.div<{ $editing?: boolean }>`
   border: 1px solid #ccc;
   transition: 0.3s;
