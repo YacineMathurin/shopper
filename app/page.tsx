@@ -9,18 +9,14 @@ import {
   CCardTitle,
 } from "@coreui/react";
 import React, { useEffect, useState } from "react";
-import api from "../infrastructure/services/api";
+import api from "@/infrastructure/services/api";
+import { LastEvaluatedKey } from "@/application/shared/types";
 
 type ArticleType = {
   name: string;
   description: string;
   price: string;
   photoLink: string;
-};
-
-type LastEvaluatedKey = {
-  primaryKey: string;
-  sortKey: string;
 };
 
 export default function Home() {

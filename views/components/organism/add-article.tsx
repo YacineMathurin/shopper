@@ -14,6 +14,7 @@ import {
 } from "@coreui/react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "@/application/contexts/account";
+import api from "@/infrastructure/services/api";
 import styled from "styled-components";
 
 type AddArticleType = {
@@ -30,35 +31,18 @@ export default function AddArticle({ setEditing }: AddArticleType) {
 
   const onSubmit = async () => {
     const formData = new FormData();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const urlImgStorage = `${apiUrl}/v1/images`;
-    const urlArticle = `${apiUrl}/v1/articles`;
-
     formData.append("key", thumbnail);
 
     try {
-      const res = await fetch(urlImgStorage, {
-        method: "PUT",
-        mode: "cors",
-        body: formData,
-      });
-      const data = await res.json();
+      const savedImageObj = await api.saveProductImage(formData);
       const dataSession = await context?.getSession();
 
-      console.log(data, dataSession?.session);
-      await fetch(urlArticle, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sellerId: dataSession?.user.username,
-          name,
-          description,
-          price,
-          photoLink: data.link,
-        }),
+      api.saveProduct({
+        sellerId: dataSession?.user.username,
+        name,
+        description,
+        price,
+        savedImageObj,
       });
     } catch (error) {
       console.error(error);
