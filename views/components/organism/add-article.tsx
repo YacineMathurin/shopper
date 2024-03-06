@@ -1,4 +1,4 @@
-import { AuthContext } from "@/application/contexts/account";
+import React, { useContext } from "react";
 import {
   CButton,
   CCard,
@@ -12,8 +12,8 @@ import {
   CFormTextarea,
   CRow,
 } from "@coreui/react";
-import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "@/application/contexts/account";
 import styled from "styled-components";
 
 type AddArticleType = {
@@ -30,10 +30,12 @@ export default function AddArticle({ setEditing }: AddArticleType) {
 
   const onSubmit = async () => {
     const formData = new FormData();
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const urlImgStorage = `${apiUrl}/v1/images`;
+    const urlArticle = `${apiUrl}/v1/articles`;
+
     formData.append("key", thumbnail);
-    //const url = `${process.env.NEXT_PUBLIC_SERVER_HOST}/v1/images`;
-    const urlImgStorage = `https://bfok72i0qb.execute-api.eu-west-3.amazonaws.com/v1/images`;
-    const urlArticle = `https://bfok72i0qb.execute-api.eu-west-3.amazonaws.com/v1/articles`;
+
     try {
       const res = await fetch(urlImgStorage, {
         method: "PUT",

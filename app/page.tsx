@@ -9,6 +9,7 @@ import {
   CCardTitle,
 } from "@coreui/react";
 import React, { useEffect, useState } from "react";
+import api from "../infrastructure/services/api";
 
 type ArticleType = {
   name: string;
@@ -25,43 +26,39 @@ type LastEvaluatedKey = {
 export default function Home() {
   const [articles, setArticles] = useState<ArticleType[] | null>(null);
   const [showMore, setShowMore] = useState(false);
-  const url =
-    "https://bfok72i0qb.execute-api.eu-west-3.amazonaws.com/v1/articles";
+
   const [lastEvaluatedKey, setLastEvaluatedKey] =
     useState<LastEvaluatedKey | null>(null);
 
   useEffect(() => {
-    fetch(url, {
-      mode: "cors",
-    })
-      .then((res) => res.json())
-      .then((res) => {
+    const fetchProducts = async () => {
+      try {
+        const res = await api.getProducts();
+
         setArticles(res.articles);
         setLastEvaluatedKey(res.lastEvaluatedKey);
         setShowMore(true);
-      })
-      .catch((err) => console.error(err));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
-  const handleLoadMore = () => {
-    fetch(
-      url +
-        `?primary-key=${lastEvaluatedKey?.primaryKey}&sort-key=${lastEvaluatedKey?.sortKey}`,
-      {
-        mode: "cors",
-      }
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res?.articles) {
-          setLastEvaluatedKey(res?.lastEvaluatedKey);
-          setArticles((lastArticles) => [
-            ...(lastArticles as ArticleType[]),
-            ...res.articles,
-          ]);
-        } else setShowMore(false);
-      })
-      .catch((err) => console.error(err));
+  const handleLoadMore = async () => {
+    try {
+      const res = await api.loadMoreProducts(lastEvaluatedKey);
+      if (res?.articles) {
+        setLastEvaluatedKey(res?.lastEvaluatedKey);
+        setArticles((lastArticles) => [
+          ...(lastArticles as ArticleType[]),
+          ...res.articles,
+        ]);
+      } else setShowMore(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
