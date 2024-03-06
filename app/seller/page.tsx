@@ -12,6 +12,8 @@ import {
 import styled from "styled-components";
 import AddArticle from "../../views/components/organism/add-article";
 import protectedPage from "../auth/protectedPage";
+import api from "@/infrastructure/services/api";
+import { LastEvaluatedKey } from "@/application/shared/types";
 
 type ArticleType = {
   name: string;
@@ -20,18 +22,12 @@ type ArticleType = {
   photoLink: string;
 };
 
-type LastEvaluatedKey = {
-  primaryKey: string;
-  sortKey: string;
-};
-
 export default function SellerDashboard() {
   protectedPage();
   const [editing, setEditing] = useState(false);
   const [articles, setArticles] = useState<ArticleType[] | null>(null);
   const [showMore, setShowMore] = useState(false);
-  const url =
-    "https://bfok72i0qb.execute-api.eu-west-3.amazonaws.com/v1/articles";
+
   const [lastEvaluatedKey, setLastEvaluatedKey] =
     useState<LastEvaluatedKey | null>(null);
 
@@ -39,25 +35,19 @@ export default function SellerDashboard() {
     setEditing(true);
   };
 
-  const handleLoadMore = () => {
-    fetch(
-      url +
-        `?primary-key=${lastEvaluatedKey?.primaryKey}&sort-key=${lastEvaluatedKey?.sortKey}`,
-      {
-        mode: "cors",
-      }
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res?.articles) {
-          setLastEvaluatedKey(res?.lastEvaluatedKey);
-          setArticles((lastArticles) => [
-            ...(lastArticles as ArticleType[]),
-            ...res.articles,
-          ]);
-        } else setShowMore(false);
-      })
-      .catch((err) => console.error(err));
+  const handleLoadMore = async () => {
+    try {
+      const res = await api.loadMoreProducts(lastEvaluatedKey);
+      if (res?.articles) {
+        setLastEvaluatedKey(res?.lastEvaluatedKey);
+        setArticles((lastArticles) => [
+          ...(lastArticles as ArticleType[]),
+          ...res.articles,
+        ]);
+      } else setShowMore(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <Wrapper>
@@ -88,7 +78,7 @@ export default function SellerDashboard() {
             </CCard>
           ))}
         </div>
-        <br />
+
         {showMore && (
           <CButton color="primary" onClick={handleLoadMore}>
             More items

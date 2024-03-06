@@ -77,7 +77,7 @@ export default function AddArticle({ setEditing }: AddArticleType) {
               placeholder="Super hat"
             />
           </CCol>
-          <br />
+
           <CCol md={4}>
             <CFormInput
               {...register("price")}
@@ -86,7 +86,7 @@ export default function AddArticle({ setEditing }: AddArticleType) {
               placeholder="50"
             />
           </CCol>
-          <br />
+
           <CCol md={4}>
             <CFormInput
               {...register("thumbnail")}
@@ -98,14 +98,14 @@ export default function AddArticle({ setEditing }: AddArticleType) {
             />
           </CCol>
         </CRow>
-        <br />
+
         <CFormTextarea
           {...register("description")}
           id="exampleFormControlInput1"
           label="Description"
           placeholder="The thing for this period"
         />
-        <br />
+
         <CButton
           color="info"
           variant="outline"

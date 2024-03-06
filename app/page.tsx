@@ -75,7 +75,6 @@ export default function Home() {
           </CCard>
         ))}
       </div>
-      <br />
       {showMore && (
         <CButton color="primary" onClick={handleLoadMore}>
           More items

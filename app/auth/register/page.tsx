@@ -54,7 +54,7 @@ export default function Auth() {
           Register
         </CButton>
       </Form>
-      <br />
+
       <div>
         <p>
           Alreay registred, go back to the <Link href="/auth">login page</Link>{" "}

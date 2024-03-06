@@ -41,7 +41,7 @@ export default function Auth() {
           aria-describedby="exampleFormControlInputHelpInline"
           defaultValue={"baby@baby.com"}
         />
-        <br />
+
         <Input
           {...register("password")}
           type="password"
@@ -51,12 +51,12 @@ export default function Auth() {
           aria-describedby="exampleFormControlInputHelpInline"
           defaultValue={"Mybaby5*"}
         />
-        <br />
+
         <CButton color="secondary" type="submit" size="sm">
           Sign in
         </CButton>
       </Form>
-      <br />
+
       <div>
         <p>
           Being in trouble ? May be you've{" "}
