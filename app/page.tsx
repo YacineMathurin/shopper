@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import api from "@/infrastructure/services/api";
 import { LastEvaluatedKey } from "@/application/shared/types";
+import styled from "styled-components";
 
 type ArticleType = {
   name: string;
@@ -60,7 +61,7 @@ export default function Home() {
   return (
     <div>
       <h1>Products</h1>
-      <div className="flex">
+      <Wrapper>
         {articles?.map((article) => (
           <CCard style={{ width: "18rem" }} key={article.name}>
             <CCardImage orientation="top" src={article.photoLink} />
@@ -74,12 +75,30 @@ export default function Home() {
             </CCardBody>
           </CCard>
         ))}
-      </div>
-      {showMore && (
-        <CButton color="primary" onClick={handleLoadMore}>
-          More items
-        </CButton>
-      )}
+      </Wrapper>
+      <LoadMore>
+        {showMore && (
+          <CButton color="primary" onClick={handleLoadMore}>
+            More items
+          </CButton>
+        )}
+      </LoadMore>
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  margin-bottom: 2em;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+const LoadMore = styled.div`
+  text-align: center;
+`;
