@@ -2,19 +2,37 @@
 
 import { createContext, useState } from "react";
 import UserPool from "../utils/cognito-pool";
-import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
+import {
+  AuthenticationDetails,
+  CognitoUser,
+  CognitoUserSession,
+  ISignUpResult,
+} from "amazon-cognito-identity-js";
 
 type AccountContextType = {
-  signup: (email: string, password: string) => Promise<unknown>;
-  authenticate: (email: string, password: string) => Promise<unknown>;
-  getSession: () => Promise<{ session: any; user: any }>;
+  signup: (
+    email: string,
+    password: string
+  ) => Promise<ISignUpResult | undefined>;
+  authenticate: (
+    email: string,
+    password: string
+  ) => Promise<CognitoUserSession>;
+  getSession: () => Promise<{
+    session: CognitoUserSession | null;
+    user: CognitoUser | null;
+  }>;
   logout: () => void;
   isOnline: boolean;
 };
 
+type IProps = {
+  children: React.ReactNode;
+};
+
 const AuthContext = createContext<AccountContextType | null>(null);
 
-function Account({ children }: any) {
+function Account({ children }: IProps) {
   const [isOnline, setIsOnline] = useState(false);
   const signup: AccountContextType["signup"] = async (email, password) => {
     return await new Promise((resolve, reject) =>
@@ -65,7 +83,7 @@ function Account({ children }: any) {
       if (!user) {
         reject();
       }
-      user?.getSession((err: any, session: any) => {
+      user?.getSession((err: Error | null, session: CognitoUserSession) => {
         if (err) {
           reject(err);
         }
