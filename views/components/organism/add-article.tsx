@@ -38,7 +38,7 @@ export default function AddArticle({ setEditing }: AddArticleType) {
       const dataSession = await context?.getSession();
 
       api.saveProduct({
-        sellerId: dataSession?.user.username,
+        sellerId: dataSession?.user?.getUsername() as string,
         name,
         description,
         price,
@@ -153,7 +153,7 @@ const Preview = styled.div`
 
 const formStyle = {
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "column" as "column",
   justifyContent: "flex-end",
   gap: "1em",
 };
