@@ -60,6 +60,7 @@ export default function Home() {
 
   return (
     <div>
+      <Banner></Banner>
       <h1>Products</h1>
       <Wrapper>
         {articles?.map((article) => (
@@ -87,15 +88,23 @@ export default function Home() {
   );
 }
 
+const Banner = styled.div`
+  height: 300px;
+  background-color: goldenrod;
+  opacity: 0.1;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2em;
   margin-bottom: 2em;
+  align-items: center;
 
   @media screen and (min-width: 768px) {
+    align-items: unset;
     flex-direction: row;
+    flex-wrap: wrap;
   }
 `;
 
