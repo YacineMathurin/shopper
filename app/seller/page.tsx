@@ -32,7 +32,7 @@ export default function SellerDashboard() {
     useState<LastEvaluatedKey | null>(null);
 
   const handleEditing = () => {
-    setEditing(true);
+    setEditing((prev) => !prev);
   };
 
   const handleLoadMore = async () => {
@@ -92,12 +92,17 @@ export default function SellerDashboard() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 5em;
+  min-height: 800px;
 `;
 
 const EditSection = styled.div<{ $editing?: boolean }>`
+  padding: ${(props) => (props.$editing ? "1em" : "0")};
   border: 1px solid #ccc;
   transition: 0.3s;
   overflow: hidden;
-  height: ${(props) => (props.$editing ? "800px" : "0")};
+  height: ${(props) => (props.$editing ? "900px" : "0")};
+
+  @media screen and (min-width: 768px) {
+    height: ${(props) => (props.$editing ? "600px" : "0")};
+  }
 `;
