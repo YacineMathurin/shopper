@@ -50,8 +50,8 @@ export default function AddArticle({ setEditing }: AddArticleType) {
   };
 
   return (
-    <div>
-      <Wrapper>
+    <Wrapper>
+      <Preview>
         <CCard style={{ width: "18rem" }}>
           {thumbnail && (
             <CCardImage
@@ -65,9 +65,14 @@ export default function AddArticle({ setEditing }: AddArticleType) {
             <CCardText>{price} $</CCardText>
           </CCardBody>
         </CCard>
-      </Wrapper>
+        <p style={{ textAlign: "center" }}>Aperçu</p>
+      </Preview>
 
-      <CForm className="m-8" onSubmit={handleSubmit(onSubmit)}>
+      <CForm
+        className="m-8"
+        onSubmit={handleSubmit(onSubmit)}
+        style={formStyle}
+      >
         <CRow>
           <CCol md={4}>
             <CFormInput
@@ -105,32 +110,57 @@ export default function AddArticle({ setEditing }: AddArticleType) {
           label="Description"
           placeholder="The thing for this period"
         />
-
-        <CButton
-          color="info"
-          variant="outline"
-          type="submit"
-          size="sm"
-          className="mr-5"
-        >
-          Add to my shop
-        </CButton>
-        <CButton
-          color="secondary"
-          size="sm"
-          variant="outline"
-          onClick={() => setEditing(false)}
-        >
-          Cancel
-        </CButton>
+        <ActionsBtn>
+          <CButton
+            color="info"
+            variant="outline"
+            type="submit"
+            size="sm"
+            className="mr-5"
+          >
+            Add to my shop
+          </CButton>
+          <CButton
+            color="secondary"
+            size="sm"
+            variant="outline"
+            onClick={() => setEditing(false)}
+          >
+            Cancel
+          </CButton>
+        </ActionsBtn>
       </CForm>
-    </div>
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+`;
+
+const Preview = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2em;
+  margin: 0 2em;
+  position: relative;
+  bottom: 10px;
+`;
+
+const formStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  gap: "1em",
+};
+
+const ActionsBtn = styled.div`
+  gap: 1em;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
 `;
