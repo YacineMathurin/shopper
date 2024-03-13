@@ -28,9 +28,6 @@ export default function Navbar() {
   );
 }
 
-const Wrapper = styled.nav`
-  box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.3);
-`;
 const wrapperStyle = {
   backgroundColor: "transparent ! important",
   boxShadow: "3px 2px 10px rgba(0, 0, 0, 0.3)",

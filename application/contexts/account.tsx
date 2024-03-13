@@ -34,6 +34,7 @@ const AuthContext = createContext<AccountContextType | null>(null);
 
 function Account({ children }: IProps) {
   const [isOnline, setIsOnline] = useState(false);
+
   const signup: AccountContextType["signup"] = async (email, password) => {
     return await new Promise((resolve, reject) =>
       UserPool.signUp(email, password, [], [], (err, data) => {
